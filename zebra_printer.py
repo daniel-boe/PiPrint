@@ -1,14 +1,16 @@
-from logging import exception
 import yaml
 import subprocess
 from pathlib import Path
 from loguru import logger as log
+from shutil import copy2
 
 PROGRAM_PATH = Path.home() / 'PiPrintData'
 PROGRAM_PATH.mkdir(parents=True,exist_ok=True)
 LABELS_PATH = PROGRAM_PATH / 'labels'
 LABELS_PATH.mkdir(exist_ok=True)
 CONFIG_PATH = PROGRAM_PATH / 'printer-config.yaml'
+
+ROOT = Path(__file__).resolve().parent
 
 log.add(PROGRAM_PATH / 'ZebraPrinter.log',backtrace=True, diagnose=True,level='INFO',retention='10 days',rotation = '1 day')
 
@@ -78,5 +80,9 @@ class ZebraPrinter:
         cls.load_label_files()        
 
 if __name__ == '__main__':
+    if not CONFIG_PATH.exists():
+        copy2(ROOT / 'printer-config-sample.yaml',CONFIG_PATH)
+
+    initialize_label_folder()
     z = ZebraPrinter()
     z.print_test_label()
