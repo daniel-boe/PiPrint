@@ -19,7 +19,7 @@ Simple print server for RPi
 * __Template__
     * ```curl <URL> -F file=@<path/to/file>```
 * __Example__
-  * ```curl http://127.0.0.1:8000/upload-file/ -F file=@mylabel.zpl```
+  * ```curl http://127.0.0.1:8000/zebra/api/upload-file/ -F file=@mylabel.zpl```
 
 
 ## Printing a label
@@ -38,4 +38,4 @@ Simple print server for RPi
 * __Template__
   * ```curl -X POST <url> -H 'content-Type: application/json' -d <JSON Data>```  
 * __Example__
-  * ```curl -X POST http://127.0.0.1:8000/print-label/ -H 'Content-Type: application/json' -d '{"name":"mylabel","formatters":{"variable1":"value1","variable2":"value2"}}'```
+  * ```curl -X POST http://127.0.0.1:8000/zebra/api/print-label/label-name -H 'Content-Type: application/json' -d '{"formatters":{"variable1":"value1","variable2":"value2"}}'```
