@@ -1,7 +1,4 @@
-import datetime as dt
-from signal import raise_signal
 from pydantic import BaseModel
-from typing import Union
 from fastapi import FastAPI, UploadFile, status, HTTPException
 from zebra_printer import ZebraPrinter
 
@@ -45,6 +42,7 @@ async def print_label(label_name: str,job: PrintJob = PrintJob(), count: int = 1
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Incorrect formatters passed')
 
 # Upload a .zpl file defining a custom label
+# TODO add some sort of status message
 @app.post(f"{BASE_URL}/upload-file/",status_code = status.HTTP_201_CREATED)
 async def upload_file(file: UploadFile):
     name = file.filename
