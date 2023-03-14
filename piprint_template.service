@@ -1,0 +1,14 @@
+[Unit]
+Description=Barcode Print Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=user
+ExecStart=//home/user/PiPrint/run-server-local.sh
+
+[Install]
+WantedBy=multi-user.target
